@@ -6,6 +6,8 @@ const int BledPin = 5;
 int buttonState = 0;
 int ledcolor = 0;
 
+bool ButtonPressed = false;
+
 void setup() {
   // put your setup code here, to run once:
   pinMode(RledPin, OUTPUT);
@@ -18,9 +20,14 @@ void loop() {
   // put your main code here, to run repeatedly:
   buttonState = digitalRead(ButtonPin);
 
-  if(buttonState == HIGH){
+  if(buttonState == HIGH && ! ButtonPressed){
     ledcolor = ledcolor+1;
-    delay(100);
+    ButtonPressed = true;
+    //delay(100);
+  }
+  if(buttonState == LOW){
+    ButtonPressed = false;
+    //delay(100);
   }
   if(ledcolor == 0){
     digitalWrite(RledPin, HIGH);
@@ -63,7 +70,7 @@ void loop() {
     digitalWrite(GledPin, LOW);
   }
   else if(ledcolor == 8){
-    ledcolor = 0;
+    ledcolor = 1;
   }
 
 }
